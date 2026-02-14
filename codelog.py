@@ -5,7 +5,7 @@ import subprocess
 
 # --- SETTINGS ---
 # List your favorite platforms here
-PLATFORMS = ["LeetCode", "Codeforces", "CodeChef", "AtCoder", "GeeksforGeeks"]
+PLATFORMS = ["LeetCode", "Codeforces", "CodeChef", "AtCoder", "GeeksforGeeks", "Miscellaneous"]
 
 # --- TEMPLATES ---
 # This is how your code file will look
