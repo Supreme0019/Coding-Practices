@@ -12,7 +12,7 @@ PLATFORMS = ["LeetCode", "Codeforces", "CodeChef", "AtCoder", "GeeksforGeeks", "
 QUESTION_TEMPLATE = """/*
 Platform: {platform}
 Problem: {name}
-Link: {link}
+
 Difficulty: {difficulty}
 Date: {date}
 */
@@ -52,9 +52,8 @@ def log_question():
     print(f"Platforms: {', '.join(PLATFORMS)}")
     platform = input("Which Platform? ").strip()
     name = input("Problem Name (e.g. Two Sum): ").strip()
-    link = input("Problem Link: ").strip()
     difficulty = input("Difficulty (Easy/Medium/Hard): ").strip()
-    ext = input("File Extension (cpp, py, java): ").strip()
+    ext = "cpp"  # Now it automatically chooses C++ every time!
     
     print("\nPaste your solution code below.")
     print("(Press Ctrl+Z then Enter on Windows, or Ctrl+D on Mac/Linux to save)")
@@ -72,7 +71,7 @@ def log_question():
     full_path = os.path.join(folder_path, filename)
 
     file_content = QUESTION_TEMPLATE.format(
-        platform=platform, name=name, link=link, 
+        platform=platform, name=name, 
         difficulty=difficulty, date=date_str, code=code_lines
     )
     
