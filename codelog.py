@@ -25,7 +25,6 @@ CONTEST_README = """# {contest_name}
 - Platform: {platform}
 - Date: {date}
 - Problems Solved: {solved}
-- Rank: {rank}
 
 ## 📝 Learnings
 {learnings}
@@ -87,14 +86,26 @@ def log_contest():
     # 1. Ask details
     platform = input("Platform: ").strip()
     contest_name = input("Contest Name: ").strip()
-    solved = input("Problems Solved (e.g. 3/5): ").strip()
-    rank = input("Rank: ").strip()
-    learnings = input("Learnings: ").strip()
+    solved = input("Problems Solved summary (e.g. 2/4): ").strip()
     
-    # 2. Create Folder
-    # Format: Platform/Contests/Date_ContestName
+    # Ask exactly how many files to loop through
+    while True:
+        try:
+            num_codes = int(input("How many problem codes will you paste right now? (Type a number, e.g. 2): ").strip())
+            break
+        except ValueError:
+            print("Please type a standard number like 1, 2, 3.")
+
+    learnings = input("Learnings (or NA): ").strip()
+    
+    # 2. Create Folder (With Windows-safe name fix)
     date_str = datetime.date.today().strftime("%Y-%m-%d")
-    folder_name = f"{date_str}_{contest_name.replace(' ', '_')}"
+    
+    safe_contest_name = contest_name.replace(" ", "_")
+    for char in '<>:"/\\|?*':
+        safe_contest_name = safe_contest_name.replace(char, '')
+        
+    folder_name = f"{date_str}_{safe_contest_name}"
     folder_path = os.path.join(platform, "Contests", folder_name)
     os.makedirs(folder_path, exist_ok=True)
 
@@ -102,14 +113,32 @@ def log_contest():
     readme_path = os.path.join(folder_path, "README.md")
     readme_content = CONTEST_README.format(
         platform=platform, contest_name=contest_name, 
-        date=date_str, solved=solved, rank=rank, learnings=learnings
+        date=date_str, solved=solved, learnings=learnings
     )
     save_file(readme_path, readme_content)
     
-    print(f"\n📂 Created contest folder: {folder_path}")
-    print("👉 You can manually drag your solution files into this folder later.")
+    # 4. Ask for codes one by one!
+    for i in range(num_codes):
+        print(f"\n--- Problem {i+1} of {num_codes} ---")
+        prob_name = input("Problem Name/Letter (e.g. A, B, Q1): ").strip()
+        
+        # Clean problem name for Windows
+        safe_prob_name = prob_name.replace(" ", "_")
+        for char in '<>:"/\\|?*':
+            safe_prob_name = safe_prob_name.replace(char, '')
+            
+        print("Paste your solution code below.")
+        print("(Press Ctrl+Z then Enter on Windows, or Ctrl+D on Mac/Linux to save)")
+        code_lines = sys.stdin.read()
+        
+        # Save as a .cpp file automatically
+        code_path = os.path.join(folder_path, f"{safe_prob_name}.cpp")
+        save_file(code_path, code_lines)
+        print(f"📄 Saved: {code_path}")
 
-    # 4. Git Sync
+    print(f"\n📂 Contest logged successfully in: {folder_path}")
+
+    # 5. Git Sync
     git_push(f"Contest: {contest_name}")
 
 def main():
