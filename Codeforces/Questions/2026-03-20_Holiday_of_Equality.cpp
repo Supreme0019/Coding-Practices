@@ -30,3 +30,13 @@ int main() {
     return 0;
 }
 
+//Alternate apporach (maths implementaion
+// int sum = 0, mx = 0;
+
+// for(int i = 0; i < n; i++){
+//     cin >> a[i];
+//     sum += a[i];
+//     mx = max(mx, a[i]);
+// }
+
+// cout << (n * mx - sum) << endl;
