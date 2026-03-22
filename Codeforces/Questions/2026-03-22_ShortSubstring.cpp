@@ -15,13 +15,32 @@ int main() {
         //         s.erase(s.begin()+i+1);
         //     }
         // }
+
+
+        // ans.push_back(s[0]);
+        // ans.push_back(s[1]);
+        // for(int i=2 ; i<s.size() ; i++){
+
+        //     if(s[i]!=ans.back()){
+        //         ans.push_back(s[i]);
+        //     }
+        // }
+    
+
         ans.push_back(s[0]);
         ans.push_back(s[1]);
-        for(int i=0 ; i<s.size() ; i++){
+        for(int i=2 ; i<s.size()-1 ; i+=2){
 
+            if(s[i]!=ans.back()){
+                ans.push_back(s[i]);
+                ans.push_back(s[i+1]);
+            }
+            else if(s[i]==ans.back()){
+                ans.push_back(s[i+1]);
+            }
         }
-        cout<<s<<endl;
-    }
 
+        cout<<ans<<endl;
+    }
     return 0;
 }
