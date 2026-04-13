@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// --- Shorthand Types ---
+using ll = long long;
+using vi = vector<int>;
+using vll = vector<ll>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+
+// --- Essential Macros ---
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+#define sz(x) (int)(x).size()
+#define f first
+#define s second
+
+// --- Constants ---
+const int MOD = 1e9 + 7;
+const ll INF = 1e18;
+
+// --- Main Solution ---
+void solve() {
+    int n;
+    string s;
+    cin>> n>>s;
+    int i = 0;
+    int N = s.size();
+
+    while (i < N && s[i] == 'o') {
+        i++;
+    }
+
+    cout << s.substr(i) << endl;
+}
+
+// --- Fast I/O & Execution ---
+int main() {
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL);
+
+    int t = 1;
+    //cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}

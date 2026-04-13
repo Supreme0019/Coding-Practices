@@ -28,26 +28,25 @@ const ll INF = 1e18;
 // 6. The actual solution function
 void solve() {
     // Problem logic goes here!
-    vector<int> p;
-        int n;
-        cin>>n;
-        int curr = 3 * n;
-
-        // Build in blocks
-        for (int i = 0; i < n; i++) {
-            p.push_back(curr - 2); // small
-            p.push_back(curr);     // large
-            p.push_back(curr - 1); // median candidate
-            curr -= 3;
+    int n,k;
+    cin>>n>>k;
+    vi a(n);
+    int sum=0;
+    for (int i = 0; i < n; i++)
+    {
+        cin>>a[i];
+        sum+=a[i];
+    }
+    
+    if(sum&1) cout<<"YES"<<endl;
+    else{
+        if(k*n%2==0){
+            cout<<"YES"<<endl;
         }
-
-        for (int x : p) cout << x << " ";
-        cout << "\n";
-    
-
-    
-
-    
+        else{
+            cout<<"NO"<<endl;
+        }
+    }
 }
 
 // 7. Main Function with Fast I/O
